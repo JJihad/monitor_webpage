@@ -55,4 +55,4 @@ function monitorPage(url) {
 
 console.log("Starting page monitoring");
 monitorPage(URL_TO_MONITOR);
-//setInterval(() => monitorPage(URL_TO_MONITOR), 1000*60*60);
+setInterval(() => monitorPage(URL_TO_MONITOR), 2000*60*60);
