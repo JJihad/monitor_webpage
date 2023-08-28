@@ -40,13 +40,17 @@ function sendMail(to, subject, text) {
     })
 }
 
+var emailSent = false;
 function monitorPage(url) {
     axios.get(url).then((response) => {
         if(response.data.includes("16 août 2023")) {
             console.log("No update yet");
+        } else if(emailSent) {
+            console.log("Page updated. Email already sent, please check your email");
         } else {
             console.log("Page updated.");
             sendMail(EMAIL_ADDRESS, EMAIL_SUBJECT, "Page updated, visit: " + URL_TO_MONITOR);
+            emailSent = true;
         }
     }).catch((error) => {
         console.log(error);
@@ -55,4 +59,4 @@ function monitorPage(url) {
 
 console.log("Starting page monitoring");
 monitorPage(URL_TO_MONITOR);
-setInterval(() => monitorPage(URL_TO_MONITOR), 2000*60*60);
+setInterval(() => monitorPage(URL_TO_MONITOR), 1000*60*15);
