@@ -1,7 +1,7 @@
 const axios = require('axios');
 const mailer = require('nodemailer');
 
-const URL_TO_MONITOR = "https://www.quebec.ca/immigration/travailler-quebec/travailleurs-qualifies/programme-regulier-travailleurs-qualifies/invitation";
+const URL_TO_MONITOR = "https://www.playstation.com/fr-ca/games/assassins-creed-the-ezio-collection/";
 const EMAIL_ADDRESS = "jbr.jihad@gmail.com";
 const EMAIL_SUBJECT = "Monitored page updated";
 
@@ -43,7 +43,7 @@ function sendMail(to, subject, text) {
 var emailSent = false;
 function monitorPage(url) {
     axios.get(url).then((response) => {
-        if(response.data.includes("16 août 2023")) {
+        if(response.data.includes("Économisez") && response.data.includes("16.04")) {
             console.log("No update yet");
         } else if(emailSent) {
             console.log("Page updated. Email already sent, please check your email");
@@ -59,4 +59,4 @@ function monitorPage(url) {
 
 console.log("Starting page monitoring");
 monitorPage(URL_TO_MONITOR);
-setInterval(() => monitorPage(URL_TO_MONITOR), 1000*60*5);
+setInterval(() => monitorPage(URL_TO_MONITOR), 1000*60*60*24);
